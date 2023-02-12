@@ -13,6 +13,7 @@ scalaVersion       := scala212
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.13")
 enablePlugins(SbtPlugin)
 
+ThisBuild / versionScheme := Some("early-semver")
 ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
 ThisBuild / githubWorkflowPublishTargetBranches :=
   Seq(
