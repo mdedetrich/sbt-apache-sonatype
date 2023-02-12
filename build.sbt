@@ -13,7 +13,20 @@ scalaVersion       := scala212
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.13")
 enablePlugins(SbtPlugin)
 
-ThisBuild / versionScheme := Some("early-semver")
+ThisBuild / versionScheme          := Some("early-semver")
+ThisBuild / test / publishArtifact := false
+ThisBuild / pomIncludeRepository   := (_ => false)
+ThisBuild / publishMavenStyle      := true
+ThisBuild / licenses += ("Apache-2.0", url("https://opensource.org/licenses/Apache-2.0"))
+ThisBuild / developers := List(
+  Developer("mdedetrich", "Matthew de Detrich", "mdedetrich@gmail.com", url("https://github.com/mdedetrich"))
+)
+ThisBuild / homepage := Some(url("https://github.com/mdedetrich/sbt-apache-sonatype"))
+
+ThisBuild / scmInfo := Some(
+  ScmInfo(url("https://github.com/mdedetrich/sbt-apache-sonatype"), "git@github.com:mdedetrich/sbt-apache-sonatype.git")
+)
+
 ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
 ThisBuild / githubWorkflowPublishTargetBranches :=
   Seq(
