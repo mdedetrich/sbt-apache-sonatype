@@ -72,9 +72,9 @@ These are keys specific to Apache projects that use Github along with Github Act
 * `apacheSonatypeCredentialsPasswordEnvVar`: The environment variable where the Sonatype user is stored, defaults to
   `NEXUS_PW` which is typically the same name as the github secret that gets added by Apache Infrastructure team.
 
-Note that since this plugin is resolving the credentials via the use of environment variables, a release manager
-can also export the same environment variables when doing a full release (which is almost always done on a local machine
-and not CI)
+Note that since this plugin is resolving the credentials via the use of environment variables, a
+[release manager](https://infra.apache.org/release-publishing.html#releasemanager) can also export the same environment
+variables when doing a main release (which is almost always done on a local machine and not CI)
 
 ## Utility functions
 
@@ -84,20 +84,24 @@ This project exposes the following utility function which can be helpful in othe
   as `apacheSonatypeLicenseFile`) to mark files which will be added to the `META-INF` folder in created artifacts. You
   can manually call this function if you want to add other files to `META-INF` folder in generated artifacts.
 
-## FAQ
+## FAQ/Notes
 
 ### Why is this project loaded automatically instead of explicitly via .enablePlugins?
 
-Since this plugin is designed to be used by Apache project/s, its intended that plugin settings are initialized
-immediately and globally. It is actually disallowed for an Apache Project to deploy maven artifacts into a repository
-outside of Apache's official Nexus repository (see https://infra.apache.org/release-distribution.html#unreleased) so
-there shouldn't be any reason to have different publish settings for different sbt projects (aside from disabling
-publishing for a specific sbt subproject which is done via `publish / skip := true` as is standard in sbt builds).
+Since this plugin is supposed to be used by Apache project/s, its intended that plugin settings are initialized
+immediately due to it being actually disallowed for an Apache Project to deploy maven artifacts into a repository
+outside of Apache's official Nexus repository (see https://infra.apache.org/release-distribution.html#unreleased), in
+other words you should only be deploying to a single repository (the Apache one).
+
+This means that generally speaking aside from `apacheSonatypeLicenseFile`, `apacheSonatypeNoticeFile`
+and `apacheSonatypeDisclaimerFile` (which are added by this plugin using `projectSettings` rather
+than `buildSettings`/`globalSettings`) there shouldn't be any reason to have different settings for different sbt
+subprojects.
 
 ## Future goals
 
-This project is yet to be tested for an actual release so its possible for it to extend other sbt ecosystem plugins
+This project is yet to be tested for an actual release, so it's possible for it to extend other sbt ecosystem plugins
 such as [sbt-pgp](https://github.com/sbt/sbt-pgp), i.e. `publishSigned` defaults to using
-[bundle deployment](https://help.sonatype.com/repomanager3/integrations/bundle-development) and so if this is not
-supported by Apache Maven Nexus repo than sbt-apache-sonatype would configure the relevant sbt-pgp settings to make
-sure it works.
+[bundle deployment](https://help.sonatype.com/repomanager3/integrations/bundle-development) and if this happens to
+not be supported by Apache Maven Nexus repo than sbt-apache-sonatype would configure the relevant sbt-pgp settings to
+make sure it works.

@@ -32,7 +32,7 @@ object SonatypeApachePlugin extends AutoPlugin {
     toFile
   }
 
-  private[sonatype] def sonatypeApacheGlobalSettings: Seq[Setting[_]] = Seq(
+  private[sonatype] lazy val sonatypeApacheGlobalSettings: Seq[Setting[_]] = Seq(
     apacheSonatypeBaseRepo                  := "repository.apache.org",
     apacheSonatypeCredentialsUserEnvVar     := "NEXUS_USER",
     apacheSonatypeCredentialsPasswordEnvVar := "NEXUS_PW",
@@ -47,14 +47,14 @@ object SonatypeApachePlugin extends AutoPlugin {
     apacheSonatypeCredentialsLogLevel := Level.Debug
   )
 
-  private[sonatype] def sbtSonatypeGlobalSettings: Seq[Setting[_]] = Seq(
+  private[sonatype] lazy val sbtSonatypeBuildSettings: Seq[Setting[_]] = Seq(
     sonatypeCredentialHost := apacheSonatypeBaseRepo.value,
     sonatypeProfileName    := s"org.apache.${apacheSonatypeProjectProfile.value}"
   )
 
   private[sonatype] lazy val baseDir = LocalRootProject / baseDirectory
 
-  private[sonatype] def sbtMavenSettings: Seq[Setting[_]] = Seq(
+  private[sonatype] lazy val sbtMavenBuildSettings: Seq[Setting[_]] = Seq(
     credentials ++= {
       val log   = sLog.value
       val level = apacheSonatypeCredentialsLogLevel.value
@@ -66,10 +66,11 @@ object SonatypeApachePlugin extends AutoPlugin {
         )
       }
     },
-    organizationName             := apacheSonatypeOrganizationName.value,
-    organizationHomepage         := Some(apacheSonatypeOrganizationHomePage.value),
-    publishMavenStyle            := true,
-    pomIncludeRepository         := (_ => false),
+    organizationName     := apacheSonatypeOrganizationName.value,
+    organizationHomepage := Some(apacheSonatypeOrganizationHomePage.value)
+  )
+
+  private[sonatype] lazy val sbtMavenProjectSettings: Seq[Setting[_]] = Seq(
     apacheSonatypeLicenseFile    := baseDir.value / "LICENSE",
     apacheSonatypeNoticeFile     := baseDir.value / "NOTICE",
     apacheSonatypeDisclaimerFile := None
@@ -89,8 +90,13 @@ object SonatypeApachePlugin extends AutoPlugin {
     )
   )
 
-  override def projectSettings: Seq[Setting[_]] =
-    sonatypeApacheGlobalSettings ++ sbtSonatypeGlobalSettings ++ sbtMavenSettings
+  override lazy val globalSettings: Seq[Setting[_]] =
+    sonatypeApacheGlobalSettings
+
+  override lazy val buildSettings: Seq[Setting[_]] =
+    sbtSonatypeBuildSettings ++ sbtMavenBuildSettings
+
+  override lazy val projectSettings: Seq[Setting[_]] = sbtMavenProjectSettings
 
   override def trigger = allRequirements
 

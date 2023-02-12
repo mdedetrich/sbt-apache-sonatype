@@ -47,3 +47,16 @@ ThisBuild / githubWorkflowPublish := Seq(
     )
   )
 )
+
+ThisBuild / githubWorkflowBuild := Seq(
+  WorkflowStep.Sbt(name = Some("Build project"), commands = List("test", "scripted"))
+)
+
+scriptedLaunchOpts += ("-Dplugin.version=" + version.value)
+
+scriptedLaunchOpts := {
+  scriptedLaunchOpts.value ++
+    Seq("-Dplugin.version=" + version.value)
+}
+
+scriptedBufferLog := false
