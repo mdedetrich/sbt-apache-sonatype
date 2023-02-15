@@ -69,7 +69,7 @@ These are keys specific to Apache projects that use Github along with Github Act
 
 * `apacheSonatypeCredentialsUserEnvVar`: The environment variable where the Sonatype user is stored, defaults to
   `NEXUS_USER` which is typically the same name as the github secret that gets added by Apache Infrastructure team.
-* `apacheSonatypeCredentialsPasswordEnvVar`: The environment variable where the Sonatype user is stored, defaults to
+* `apacheSonatypeCredentialsPasswordEnvVar`: The environment variable where the Sonatype password is stored, defaults to
   `NEXUS_PW` which is typically the same name as the github secret that gets added by Apache Infrastructure team.
 
 Note that since this plugin is resolving the credentials via the use of environment variables, a
