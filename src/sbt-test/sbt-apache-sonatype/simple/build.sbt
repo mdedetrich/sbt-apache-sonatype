@@ -1,6 +1,8 @@
 ThisBuild / scalaVersion                 := "2.13.10"
 ThisBuild / apacheSonatypeProjectProfile := "project"
 
+resolvers += SonatypeApacheSnapshotResolver
+
 TaskKey[Unit]("check-organization-name") := {
   val name = "Apache Software Foundation"
   if (organizationName.value != name && (ThisBuild / organizationName).value != name)
