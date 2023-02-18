@@ -8,14 +8,7 @@ import xerial.sbt.Sonatype.SonatypeKeys._
 
 object SonatypeApachePlugin extends AutoPlugin {
 
-  object autoImport extends SonatypeApacheKeys {
-
-    /** Contains the Apache Maven Snapshot repository, add this to your project using `.settings` so you can resolve
-      * snapshot artifacts.
-      */
-    val SonatypeApacheSnapshotResolver: Resolver =
-      "Apache Nexus Snapshots".at(s"https://repository.apache.org/content/repositories/snapshots/")
-  }
+  object autoImport extends SonatypeApacheKeys
 
   import autoImport._
 
