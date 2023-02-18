@@ -83,9 +83,6 @@ This project exposes the following utility function which can be helpful in othe
 * `SonatypeApachePlugin.addFileToMetaInf`: This function is used internally (i.e. with keys such
   as `apacheSonatypeLicenseFile`) to mark files which will be added to the `META-INF` folder in created artifacts. You
   can manually call this function if you want to add other files to `META-INF` folder in generated artifacts.
-* `autoImport.SonatypeApacheSnapshotResolver`: Add this to your resolvers (
-  i.e. `resolvers += SonatypeApacheSnapshotResolver`) in order to resolve snapshot artifacts from Apache's Maven
-  repository.
 
 ## FAQ/Notes
 
