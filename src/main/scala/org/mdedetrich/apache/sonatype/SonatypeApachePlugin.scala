@@ -71,6 +71,18 @@ object SonatypeApachePlugin extends AutoPlugin {
   )
 
   private[sonatype] lazy val sbtMavenProjectSettings: Seq[Setting[_]] = Seq(
+    licenses ++= {
+      val log             = sLog.value
+      val currentLicenses = licenses.value
+      currentLicenses.collectFirst { case (field, url) if field.contains("Apache") => url } match {
+        case Some(url) =>
+          log.warn(
+            s"No Apache license added in project ${projectID.value} since a duplicate license has already been detected with url: ${url.toString}, please remove it"
+          )
+          Nil
+        case None => Seq("Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.html"))
+      }
+    },
     apacheSonatypeLicenseFile    := baseDir.value / "LICENSE",
     apacheSonatypeNoticeFile     := baseDir.value / "NOTICE",
     apacheSonatypeDisclaimerFile := None

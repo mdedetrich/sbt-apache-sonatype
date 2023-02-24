@@ -21,3 +21,10 @@ TaskKey[Unit]("check-pom-include-repository") := {
     sys.error("pomIncludeRepository not set")
   ()
 }
+
+TaskKey[Unit]("check-pom-license-field") := {
+  val apacheField = "Apache-2.0"
+  if (!licenses.value.exists { case (field, _) => field == apacheField })
+    sys.error("licenses not set")
+  ()
+}
