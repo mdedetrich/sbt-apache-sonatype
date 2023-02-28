@@ -1,6 +1,7 @@
 > package
 $ must-mirror target/scala-2.13/resource_managed/main/META-INF/LICENSE LICENSE
 $ must-mirror target/scala-2.13/resource_managed/main/META-INF/NOTICE NOTICE
+> checkOrganization
 > checkOrganizationName
 > checkPublishMavenStyle
 > checkPomIncludeRepository
