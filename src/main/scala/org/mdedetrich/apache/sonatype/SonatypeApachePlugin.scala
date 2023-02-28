@@ -66,6 +66,7 @@ object SonatypeApachePlugin extends AutoPlugin {
         )
       }
     },
+    organization         := s"org.apache.${apacheSonatypeProjectProfile.value}",
     organizationName     := apacheSonatypeOrganizationName.value,
     organizationHomepage := Some(apacheSonatypeOrganizationHomePage.value)
   )

@@ -1,9 +1,18 @@
 ThisBuild / scalaVersion                 := "2.13.10"
 ThisBuild / apacheSonatypeProjectProfile := "project"
 
+TaskKey[Unit]("check-organization") := {
+  val org = "org.apache.project"
+  if (
+    organization.value != org || (ThisBuild / organization).value != org || (sonatypeProfileName.value != org) || (ThisBuild / sonatypeProfileName).value != org
+  )
+    sys.error("apacheSonatypeProjectProfile not set")
+  ()
+}
+
 TaskKey[Unit]("check-organization-name") := {
   val name = "Apache Software Foundation"
-  if (organizationName.value != name && (ThisBuild / organizationName).value != name)
+  if (organizationName.value != name || (ThisBuild / organizationName).value != name)
     sys.error("apacheSonatypeOrganizationName not set")
   ()
 }
