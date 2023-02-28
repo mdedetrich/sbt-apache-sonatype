@@ -41,7 +41,7 @@ the `ThisBuild` syntax, i.e. `ThisBuild / apacheSonatypeProjectProfile := "mypro
 Also for the various settings that point to a file, if you happen to have a multi project sbt build and you want to
 point to a single file (typically a single file in the root project dir) remember to use `LocalRootProject`, i.e.
 if you want to set `apacheSonatypeDisclaimerFile` to point to a `DISCLAIMER` file in the root of your build, do
-`ThisBuild / apacheSonatypeDisclaimerFile := Some(LocalRootProject.value / "DISCLAIMER")`.
+`ThisBuild / apacheSonatypeDisclaimerFile := Some((LocalRootProject / baseDirectory).value / "DISCLAIMER")`.
 
 * `apacheSonatypeProjectProfile`: This is meant to be the name of your Apache project (for example if your project is
   named `myproject` then the Sonatype profile name with be `org.apache.myproject`). This is the only setting that has to
