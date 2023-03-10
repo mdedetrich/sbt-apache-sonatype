@@ -86,7 +86,8 @@ object SonatypeApachePlugin extends AutoPlugin {
     },
     apacheSonatypeLicenseFile    := baseDir.value / "LICENSE",
     apacheSonatypeNoticeFile     := baseDir.value / "NOTICE",
-    apacheSonatypeDisclaimerFile := None
+    apacheSonatypeDisclaimerFile := None,
+    publishTo                    := sonatypePublishToBundle.value
   ) ++ inConfig(Compile)(
     Seq(
       resourceGenerators += {
