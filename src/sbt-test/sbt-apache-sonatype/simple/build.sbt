@@ -42,5 +42,5 @@ TaskKey[Unit]("check-publish-to-field") := {
   val apacheSnapshotRepo =
     "https://repository.apache.org/content/repositories/snapshots"
   if (!publishTo.value.exists { case resolver: MavenRepository => resolver.root == apacheSnapshotRepo })
-    ()
+    sys.error("publishTo not set")
 }
