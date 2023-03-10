@@ -37,3 +37,10 @@ TaskKey[Unit]("check-pom-license-field") := {
     sys.error("licenses not set")
   ()
 }
+
+TaskKey[Unit]("check-publish-to-field") := {
+  val apacheSnapshotRepo =
+    "https://repository.apache.org/content/repositories/snapshots"
+  if (!publishTo.value.exists { case resolver: MavenRepository => resolver.root == apacheSnapshotRepo })
+    ()
+}
