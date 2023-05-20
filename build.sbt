@@ -10,7 +10,7 @@ lazy val scala212 = "2.12.17"
 crossScalaVersions := Seq(scala212)
 scalaVersion       := scala212
 
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.13")
+addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.21")
 enablePlugins(SbtPlugin)
 
 ThisBuild / versionScheme          := Some("early-semver")
