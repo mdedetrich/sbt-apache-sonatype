@@ -3,7 +3,7 @@ package org.mdedetrich.apache.sonatype
 import sbt.util.Level
 import sbt.{File, SettingKey, settingKey}
 
-trait SonatypeApacheKeys {
+trait ApacheSonatypeKeys {
   lazy val apacheSonatypeBaseRepo: SettingKey[String] =
     settingKey[String]("The base host for the Apache Nexus repository")
   lazy val apacheSonatypeProjectProfile: SettingKey[String] =
