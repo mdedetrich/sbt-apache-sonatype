@@ -6,9 +6,9 @@ import sbt.util.Level
 import xerial.sbt.Sonatype
 import xerial.sbt.Sonatype.SonatypeKeys._
 
-object SonatypeApachePlugin extends AutoPlugin {
+object ApacheSonatypePlugin extends AutoPlugin {
 
-  object autoImport extends SonatypeApacheKeys
+  object autoImport extends ApacheSonatypeKeys
 
   import autoImport._
 
@@ -32,7 +32,7 @@ object SonatypeApachePlugin extends AutoPlugin {
     toFile
   }
 
-  private[sonatype] lazy val sonatypeApacheGlobalSettings: Seq[Setting[_]] = Seq(
+  private[sonatype] lazy val apacheSonatypeGlobalSettings: Seq[Setting[_]] = Seq(
     apacheSonatypeBaseRepo                  := "repository.apache.org",
     apacheSonatypeCredentialsUserEnvVar     := "NEXUS_USER",
     apacheSonatypeCredentialsPasswordEnvVar := "NEXUS_PW",
@@ -105,7 +105,7 @@ object SonatypeApachePlugin extends AutoPlugin {
   )
 
   override lazy val globalSettings: Seq[Setting[_]] =
-    sonatypeApacheGlobalSettings
+    apacheSonatypeGlobalSettings
 
   override lazy val buildSettings: Seq[Setting[_]] =
     sbtSonatypeBuildSettings ++ sbtMavenBuildSettings
