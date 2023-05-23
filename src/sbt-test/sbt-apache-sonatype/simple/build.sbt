@@ -44,3 +44,11 @@ TaskKey[Unit]("check-publish-to-field") := {
   if (!publishTo.value.exists { case resolver: MavenRepository => resolver.root == apacheSnapshotRepo })
     sys.error("publishTo not set")
 }
+
+TaskKey[Unit]("extract-packageSrc-contents") := {
+  val sourcesJar =
+    target.value / s"scala-${scalaBinaryVersion.value}" / s"${name.value}_${scalaBinaryVersion.value}-${version.value}-sources.jar"
+  val targetDir = target.value / s"scala-${scalaBinaryVersion.value}" / "packageSrc"
+
+  IO.unzip(sourcesJar, targetDir)
+}

@@ -100,6 +100,12 @@ object ApacheSonatypePlugin extends AutoPlugin {
             .map(disclaimerFile => addFileToMetaInf(dir, disclaimerFile))
             .toList
         }
+      },
+      packageSrc / mappings ++= {
+        Seq(
+          apacheSonatypeLicenseFile.value -> "META-INF/LICENSE",
+          apacheSonatypeNoticeFile.value  -> "META-INF/NOTICE"
+        ) ++ apacheSonatypeDisclaimerFile.value.map(path => path -> "META-INF/DISCLAIMER").toSeq
       }
     )
   )
