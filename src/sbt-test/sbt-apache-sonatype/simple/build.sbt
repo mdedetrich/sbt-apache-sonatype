@@ -52,3 +52,11 @@ TaskKey[Unit]("extract-packageSrc-contents") := {
 
   IO.unzip(sourcesJar, targetDir)
 }
+
+TaskKey[Unit]("extract-packageDoc-contents") := {
+  val sourcesJar =
+    target.value / s"scala-${scalaBinaryVersion.value}" / s"${name.value}_${scalaBinaryVersion.value}-${version.value}-javadoc.jar"
+  val targetDir = target.value / s"scala-${scalaBinaryVersion.value}" / "packageDoc"
+
+  IO.unzip(sourcesJar, targetDir)
+}
