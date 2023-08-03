@@ -6,9 +6,9 @@ scalacOptions ++= Seq(
   "-opt-inline-from:<sources>"
 )
 
-lazy val scala212 = "2.12.17"
-crossScalaVersions := Seq(scala212)
-scalaVersion       := scala212
+lazy val scala212 = "2.12.18"
+ThisBuild / crossScalaVersions := Seq(scala212)
+ThisBuild / scalaVersion       := scala212
 
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.21")
 addSbtPlugin("com.github.sbt" % "sbt-pgp"      % "2.2.1")
