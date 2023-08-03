@@ -1,7 +1,7 @@
 package org.mdedetrich.apache.sonatype
 
-import sbt._
 import sbt.Keys._
+import sbt._
 import sbt.util.Level
 import xerial.sbt.Sonatype
 import xerial.sbt.Sonatype.SonatypeKeys._
