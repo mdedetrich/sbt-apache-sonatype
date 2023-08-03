@@ -53,6 +53,10 @@ ThisBuild / githubWorkflowBuild := Seq(
   WorkflowStep.Sbt(name = Some("Build project"), commands = List("test", "scripted"))
 )
 
+ThisBuild / githubWorkflowBuildPreamble := Seq(
+  WorkflowStep.Sbt(List("scalafixAll --check"), name = Some("Linter: Scalafix checks"))
+)
+
 scriptedLaunchOpts += ("-Dplugin.version=" + version.value)
 
 scriptedLaunchOpts := {
@@ -61,3 +65,15 @@ scriptedLaunchOpts := {
 }
 
 scriptedBufferLog := false
+
+// scalafix specific settings
+inThisBuild(
+  List(
+    semanticdbEnabled          := true,
+    semanticdbVersion          := scalafixSemanticdb.revision,
+    scalafixScalaBinaryVersion := scalaBinaryVersion.value,
+    scalacOptions ++= Seq(
+      "-Ywarn-unused"
+    )
+  )
+)
