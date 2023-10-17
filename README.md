@@ -22,7 +22,7 @@ i.e.
 addSbtPlugin("org.mdedetrich" % "sbt-apache-sonatype" % "<version>")
 ```
 
-And then set the only mandatory key which is `apacheSonatypeProjectProfile"`, see [below](#notable-sbt-plugin-keys).
+And then set the only mandatory key which is `apacheSonatypeProjectProfile`, see [below](#notable-sbt-plugin-keys).
 
 ### Enabling project to publish to Apache's Maven Nexus Repository
 
