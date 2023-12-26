@@ -29,6 +29,6 @@ trait ApacheSonatypeKeys {
   lazy val apacheSonatypeNoticeFile: SettingKey[File] =
     settingKey[File]("The NOTICE file which needs to be included in published artifact")
   lazy val apacheSonatypeDisclaimerFile: SettingKey[Option[File]] =
-    settingKey[Option[File]]("The NOTICE file which needs to be included in published artifact")
+    settingKey[Option[File]]("The DISCLAIMER file which can optionally be included in published artifact")
 
 }
