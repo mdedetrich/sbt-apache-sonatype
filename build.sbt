@@ -57,6 +57,8 @@ ThisBuild / githubWorkflowBuildPreamble := Seq(
   WorkflowStep.Sbt(List("scalafixAll --check"), name = Some("Linter: Scalafix checks"))
 )
 
+ThisBuild / githubWorkflowOSes := Seq("ubuntu-latest", "macos-latest", "windows-latest")
+
 scriptedLaunchOpts += ("-Dplugin.version=" + version.value)
 
 scriptedLaunchOpts := {
