@@ -62,6 +62,9 @@ if you want to set `apacheSonatypeDisclaimerFile` to point to a `DISCLAIMER` fil
 * `apacheSonatypeCredentialsLogLevel`: The log level to be used when logging about potential problems in resolving
   credentials, defaults to `Level.Debug`. If you are trying to diagnose issues with resolving credentials then increase
   the log level to either `Level.Warn` or `Level.Error`.
+* `apacheSonatypeArtifactNameProcessor`: A function which converts the existing sbt `name` `SettingKey` into an ASF
+  compliant human-readable format. By default, this replaces all `-`/`_` with spaces, capitalizes the words and adds
+  an Apache prefix to the name if it doesn't exist.
 
 ### Keys for Github Actions
 

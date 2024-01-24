@@ -30,5 +30,8 @@ trait ApacheSonatypeKeys {
     settingKey[File]("The NOTICE file which needs to be included in published artifact")
   lazy val apacheSonatypeDisclaimerFile: SettingKey[Option[File]] =
     settingKey[Option[File]]("The DISCLAIMER file which can optionally be included in published artifact")
-
+  lazy val apacheSonatypeArtifactNameProcessor: SettingKey[String => String] =
+    settingKey[String => String](
+      "A function that turns the name setting into an ASF complaint human readable form for the pom.xml"
+    )
 }

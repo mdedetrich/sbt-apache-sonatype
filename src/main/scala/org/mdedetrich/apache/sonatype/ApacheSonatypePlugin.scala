@@ -32,6 +32,16 @@ object ApacheSonatypePlugin extends AutoPlugin {
     toFile
   }
 
+  final private[sonatype] def processArtifactName(artifactId: String) = {
+    val prettified = artifactId
+      .replaceAll("-", " ")
+      .replaceAll("_", " ")
+      .split(" ")
+      .map(_.capitalize)
+      .mkString(" ")
+    if (prettified.startsWith("Apache ")) prettified else s"Apache $prettified"
+  }
+
   private[sonatype] lazy val apacheSonatypeGlobalSettings: Seq[Setting[_]] = Seq(
     apacheSonatypeBaseRepo                  := "repository.apache.org",
     apacheSonatypeCredentialsUserEnvVar     := "NEXUS_USER",
@@ -44,7 +54,8 @@ object ApacheSonatypePlugin extends AutoPlugin {
                                      apacheSonatypeCredentialsPasswordEnvVar.value
       )
     },
-    apacheSonatypeCredentialsLogLevel := Level.Debug
+    apacheSonatypeCredentialsLogLevel   := Level.Debug,
+    apacheSonatypeArtifactNameProcessor := processArtifactName
   )
 
   private[sonatype] lazy val sbtSonatypeBuildSettings: Seq[Setting[_]] = Seq(
@@ -53,6 +64,27 @@ object ApacheSonatypePlugin extends AutoPlugin {
   )
 
   private[sonatype] lazy val baseDir = LocalRootProject / baseDirectory
+
+  import scala.xml._
+
+  private[sonatype] def processNameInPom(processName: String => String): Node => Node = (pomXml: Node) =>
+    new transform.RewriteRule {
+      override def transform(n: Node): Seq[Node] = n match {
+        case projectNode if projectNode.label == "project" =>
+          val modifiedChildren = projectNode.child.collect {
+            case <name>{currentName}</name> => <name>{processName(currentName.text)}</name>
+            case other                      => other
+          }
+          Elem(projectNode.prefix,
+               projectNode.label,
+               projectNode.attributes,
+               projectNode.scope,
+               minimizeEmpty = false,
+               modifiedChildren: _*
+          )
+        case other => other
+      }
+    }.transform(pomXml).head
 
   private[sonatype] lazy val sbtMavenBuildSettings: Seq[Setting[_]] = Seq(
     credentials ++= {
@@ -68,7 +100,8 @@ object ApacheSonatypePlugin extends AutoPlugin {
     },
     organization         := s"org.apache.${apacheSonatypeProjectProfile.value}",
     organizationName     := apacheSonatypeOrganizationName.value,
-    organizationHomepage := Some(apacheSonatypeOrganizationHomePage.value)
+    organizationHomepage := Some(apacheSonatypeOrganizationHomePage.value),
+    pomPostProcess       := pomPostProcess.value andThen processNameInPom(apacheSonatypeArtifactNameProcessor.value)
   )
 
   private[sonatype] lazy val sbtMavenProjectSettings: Seq[Setting[_]] = Seq(

@@ -1,5 +1,6 @@
 ThisBuild / scalaVersion                 := "2.13.10"
 ThisBuild / apacheSonatypeProjectProfile := "project"
+name                                     := "some-name"
 
 TaskKey[Unit]("check-organization") := {
   val org = "org.apache.project"
@@ -59,4 +60,12 @@ TaskKey[Unit]("extract-packageDoc-contents") := {
   val targetDir = target.value / s"scala-${scalaBinaryVersion.value}" / "packageDoc"
 
   IO.unzip(sourcesJar, targetDir)
+}
+
+TaskKey[Unit]("check-artifact-name") := {
+  val file     = makePom.value
+  val xml      = scala.xml.XML.loadFile(file)
+  val nameNode = (xml \ "name").text
+  if (nameNode != "Apache Some Name")
+    sys.error(s"expected artifact name to be Apache Some Name, instead got ${nameNode}")
 }

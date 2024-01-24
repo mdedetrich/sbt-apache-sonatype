@@ -15,3 +15,5 @@ $ must-mirror target/scala-2.13/packageDoc/META-INF/NOTICE NOTICE
 > checkPomIncludeRepository
 > checkPomLicenseField
 > checkPublishToField
+> checkArtifactName
+
