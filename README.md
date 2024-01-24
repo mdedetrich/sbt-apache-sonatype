@@ -57,7 +57,7 @@ if you want to set `apacheSonatypeDisclaimerFile` to point to a `DISCLAIMER` fil
   Projects](https://incubator.apache.org/) or other exceptions, see
   https://incubator.apache.org/policy/incubation.html#disclaimers.
 * `apacheSonatypeCredentialsProvider`: How to resolve the Apache Maven Nexus credentials. Defaults to
-  `CredentialProvider.Environment` which is typically how it's passed in for Github actions however this can be
+  `CredentialProvider.Environment` which is typically how it's passed in for GitHub actions however this can be
   overridden if you want to define how to resolve credentials (see the `CredentialsProvider` trait).
 * `apacheSonatypeCredentialsLogLevel`: The log level to be used when logging about potential problems in resolving
   credentials, defaults to `Level.Debug`. If you are trying to diagnose issues with resolving credentials then increase
@@ -68,12 +68,12 @@ if you want to set `apacheSonatypeDisclaimerFile` to point to a `DISCLAIMER` fil
 
 ### Keys for Github Actions
 
-These are keys specific to Apache projects that use Github along with Github Actions.
+These are keys specific to Apache projects that use GitHub along with GitHub Actions.
 
 * `apacheSonatypeCredentialsUserEnvVar`: The environment variable where the Sonatype user is stored, defaults to
-  `NEXUS_USER` which is typically the same name as the github secret that gets added by Apache Infrastructure team.
+  `NEXUS_USER` which is typically the same name as the GitHub secret that gets added by Apache Infrastructure team.
 * `apacheSonatypeCredentialsPasswordEnvVar`: The environment variable where the Sonatype password is stored, defaults to
-  `NEXUS_PW` which is typically the same name as the github secret that gets added by Apache Infrastructure team.
+  `NEXUS_PW` which is typically the same name as the GitHub secret that gets added by Apache Infrastructure team.
 
 Note that since this plugin is resolving the credentials via the use of environment variables, a
 [release manager](https://infra.apache.org/release-publishing.html#releasemanager) can also export the same environment
