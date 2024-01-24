@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.apache.pekko</groupId>
+    <artifactId>pekko-stream_3</artifactId>
+    <packaging>jar</packaging>
+    <description>Apache Pekko is a toolkit for building highly concurrent, distributed, and resilient message-driven applications for Java and Scala.</description>
+    <url>https://pekko.apache.org/</url>
+    <version>1.0.2</version>
+    <licenses>
+        <license>
+            <name>Apache-2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <name>Apache Pekko Stream</name>
+    <inceptionYear>2022</inceptionYear>
+    <organization>
+        <name>Apache Software Foundation</name>
+        <url>https://www.apache.org</url>
+    </organization>
+    <scm>
+        <url>https://github.com/apache/incubator-pekko</url>
+        <connection>scm:git:https://github.com/apache/incubator-pekko.git</connection>
+        <developerConnection>scm:git:git@github.com:apache/incubator-pekko.git</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <id>pekko-contributors</id>
+            <name>Apache Pekko Contributors</name>
+            <url>https://github.com/apache/incubator-pekko/graphs/contributors</url>
+            <email>dev@pekko.apache.org</email>
+        </developer>
+    </developers>
+    <properties>
+        <info.apiURL>https://pekko.apache.org/api/pekko/1.0.2</info.apiURL>
+        <info.versionScheme>semver-spec</info.versionScheme>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.pekko</groupId>
+            <artifactId>pekko-actor_3</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pekko</groupId>
+            <artifactId>pekko-protobuf-v3_3</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala3-library_3</artifactId>
+            <version>3.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.reactivestreams</groupId>
+            <artifactId>reactive-streams</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe</groupId>
+            <artifactId>ssl-config-core_3</artifactId>
+            <version>0.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_3</artifactId>
+            <version>3.2.14</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
