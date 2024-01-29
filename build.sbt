@@ -1,10 +1,26 @@
 name         := "sbt-apache-sonatype"
 sbtPlugin    := true
 organization := "org.mdedetrich"
-scalacOptions ++= Seq(
-  "-opt:l:inline",
-  "-opt-inline-from:<sources>"
+
+// compile settings
+scalacOptions ++= List(
+  "-unchecked",
+  "-deprecation",
+  "-language:_",
+  "-encoding",
+  "UTF-8"
 )
+
+scalacOptions ++= {
+  if (insideCI.value) {
+    val log = sLog.value
+    log.info("Running in CI, enabling Scala2 optimizer")
+    Seq(
+      "-opt-inline-from:<sources>",
+      "-opt:l:inline"
+    )
+  } else Nil
+}
 
 lazy val scala212 = "2.12.18"
 ThisBuild / crossScalaVersions := Seq(scala212)
