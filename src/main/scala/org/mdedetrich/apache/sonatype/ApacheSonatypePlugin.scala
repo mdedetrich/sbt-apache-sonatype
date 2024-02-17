@@ -158,8 +158,8 @@ object ApacheSonatypePlugin extends AutoPlugin {
 
   override lazy val projectSettings: Seq[Setting[_]] = sbtMavenProjectSettings
 
-  override def trigger = allRequirements
+  override lazy val trigger = allRequirements
 
-  override def requires = Sonatype
+  override lazy val requires = Sonatype
 
 }
