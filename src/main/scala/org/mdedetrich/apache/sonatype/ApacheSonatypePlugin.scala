@@ -134,13 +134,6 @@ object ApacheSonatypePlugin extends AutoPlugin {
             .toList
         }
       },
-      // See https://issues.apache.org/jira/browse/LEGAL-28
-      packageSrc / mappings ++= {
-        Seq(
-          apacheSonatypeLicenseFile.value -> "META-INF/LICENSE",
-          apacheSonatypeNoticeFile.value  -> "META-INF/NOTICE"
-        ) ++ apacheSonatypeDisclaimerFile.value.map(path => path -> "META-INF/DISCLAIMER").toSeq
-      },
       packageDoc / mappings ++= {
         Seq(
           apacheSonatypeLicenseFile.value -> "META-INF/LICENSE",
