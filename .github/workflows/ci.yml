@@ -23,7 +23,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-12, windows-latest]
-        scala: [2.12.18]
+        scala: [2.12.20]
         java: [temurin@8]
     runs-on: ${{ matrix.os }}
     steps:
@@ -34,7 +34,7 @@ jobs:
 
       - name: Configure pagefile for Windows
         if: contains(runner.os, 'windows')
-        uses: al-cheb/configure-pagefile-action@v1.3
+        uses: al-cheb/configure-pagefile-action@v1.4
         with:
           minimum-size: 2GB
           maximum-size: 8GB
@@ -52,6 +52,9 @@ jobs:
           distribution: temurin
           java-version: 8
           cache: sbt
+
+      - name: Setup sbt
+        uses: sbt/setup-sbt@v1
 
       - name: 'Linter: Scalafix checks'
         shell: bash
@@ -82,7 +85,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [2.12.18]
+        scala: [2.12.20]
         java: [temurin@8]
     runs-on: ${{ matrix.os }}
     steps:
@@ -92,7 +95,7 @@ jobs:
 
       - name: Configure pagefile for Windows
         if: contains(runner.os, 'windows')
-        uses: al-cheb/configure-pagefile-action@v1.3
+        uses: al-cheb/configure-pagefile-action@v1.4
         with:
           minimum-size: 2GB
           maximum-size: 8GB
@@ -111,12 +114,15 @@ jobs:
           java-version: 8
           cache: sbt
 
-      - name: Download target directories (2.12.18)
+      - name: Setup sbt
+        uses: sbt/setup-sbt@v1
+
+      - name: Download target directories (2.12.20)
         uses: actions/download-artifact@v4
         with:
-          name: target-${{ matrix.os }}-2.12.18-${{ matrix.java }}
+          name: target-${{ matrix.os }}-2.12.20-${{ matrix.java }}
 
-      - name: Inflate target directories (2.12.18)
+      - name: Inflate target directories (2.12.20)
         run: |
           tar xf targets.tar
           rm targets.tar
