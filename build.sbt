@@ -22,11 +22,11 @@ scalacOptions ++= {
   } else Nil
 }
 
-lazy val scala212 = "2.12.18"
+lazy val scala212 = "2.12.20"
 ThisBuild / crossScalaVersions := Seq(scala212)
 ThisBuild / scalaVersion       := scala212
 
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.10.0")
+addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.11.3")
 addSbtPlugin("com.github.sbt" % "sbt-pgp"      % "2.2.1")
 enablePlugins(SbtPlugin)
 
@@ -87,9 +87,8 @@ scriptedBufferLog := false
 // scalafix specific settings
 inThisBuild(
   List(
-    semanticdbEnabled          := true,
-    semanticdbVersion          := scalafixSemanticdb.revision,
-    scalafixScalaBinaryVersion := scalaBinaryVersion.value,
+    semanticdbEnabled := true,
+    semanticdbVersion := scalafixSemanticdb.revision,
     scalacOptions ++= Seq(
       "-Ywarn-unused"
     )
@@ -97,5 +96,5 @@ inThisBuild(
 )
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.2.17" % Test
+  "org.scalatest" %% "scalatest" % "3.2.19" % Test
 )
