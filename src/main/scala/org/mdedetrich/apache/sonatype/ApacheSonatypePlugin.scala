@@ -12,6 +12,9 @@ object ApacheSonatypePlugin extends AutoPlugin {
 
   import autoImport._
 
+  private val longPattern  = """\d{1,19}"""
+  private val versionRegex = raw"""^($longPattern)\.($longPattern)\.($longPattern)\S*""".r
+
   /** Adds a file to the a specified resourceManaged `META-INF` folder so that it will get included by sbt when
     * generating artifacts
     * @see
@@ -132,6 +135,28 @@ object ApacheSonatypePlugin extends AutoPlugin {
           ) ++ apacheSonatypeDisclaimerFile.value
             .map(disclaimerFile => addFileToMetaInf(dir, disclaimerFile))
             .toList
+        }
+      },
+      packageSrc / mappings ++= {
+        val log         = streams.value.log
+        val _sbtVersion = sbtVersion.value
+        // From version 1.10.2 and onwards sbt automatically adds these values into packageSrc, see
+        // https://github.com/sbt/sbt/pull/7630
+        _sbtVersion match {
+          case versionRegex(major, minor, patch) if major.toLong >= 1 && minor.toLong >= 10 && patch.toLong >= 2 =>
+            log.debug(s"Found sbtVersion: ${_sbtVersion} which greater than or equal to 1.10.2, not applying pkgSrc")
+            Seq.empty
+          case versionRegex(_, _, _) =>
+            log.debug(s"Found sbtVersion: ${_sbtVersion} which is less than 1.10.2, applying pkgSrc manually")
+            Seq(
+              apacheSonatypeLicenseFile.value -> "META-INF/LICENSE",
+              apacheSonatypeNoticeFile.value  -> "META-INF/NOTICE"
+            ) ++ apacheSonatypeDisclaimerFile.value.map(path => path -> "META-INF/DISCLAIMER").toSeq
+          case _ =>
+            log.error(
+              s"Error determining major, minor and patch from sbtVersion: ${_sbtVersion}. packageSrc may be broken!"
+            )
+            Seq.empty
         }
       },
       packageDoc / mappings ++= {

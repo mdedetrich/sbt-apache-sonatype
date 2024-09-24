@@ -1,0 +1,20 @@
+> package
+$ must-mirror target/scala-2.13/resource_managed/main/META-INF/LICENSE LICENSE
+$ must-mirror target/scala-2.13/resource_managed/main/META-INF/NOTICE NOTICE
+> packageSrc
+# See https://issues.apache.org/jira/browse/LEGAL-28
+> extractPackageSrcContents
+$ must-mirror target/scala-2.13/packageSrc/META-INF/LICENSE LICENSE
+$ must-mirror target/scala-2.13/packageSrc/META-INF/NOTICE NOTICE
+> packageDoc
+> extractPackageDocContents
+$ must-mirror target/scala-2.13/packageDoc/META-INF/LICENSE LICENSE
+$ must-mirror target/scala-2.13/packageDoc/META-INF/NOTICE NOTICE
+> checkOrganization
+> checkOrganizationName
+> checkPublishMavenStyle
+> checkPomIncludeRepository
+> checkPomLicenseField
+> checkPublishToField
+> checkArtifactName
+

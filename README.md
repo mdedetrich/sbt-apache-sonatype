@@ -12,8 +12,6 @@ set.
 Once this is done you can then publish your projects Maven artifacts into Apache's Nexus by using
 `publish`/`publishSigned` as is idiomatically done in sbt projects.
 
-This plugin requires at least sbt version 1.10.2.
-
 ## Usage
 
 Since this plugin is an [auto plugin](https://www.scala-sbt.org/1.x/api/sbt/AutoPlugin.html) that immediately triggers
